@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Internship Advert Review{% endblock %}
+{% block content %}
+<div class="stack">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="muted">Submit a new advertisement for analysis, or review your recent results.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 style="font-size:1.1rem;margin:0;">Quick actions</h2>
+    </div>
+    <div class="stack" style="flex-direction:row;gap:1rem;flex-wrap:wrap;">
+      <a href="/analyse" class="btn">Analyse a new advertisement</a>
+      <a href="/history" class="btn secondary">View analysis history</a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 style="font-size:1.1rem;margin:0;">Recent submissions</h2>
+      <span class="meta">Most recent first</span>
+    </div>
+    <div id="recent-list">
+      <p class="muted">Loading…</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
