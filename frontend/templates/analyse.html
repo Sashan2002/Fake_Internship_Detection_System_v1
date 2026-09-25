@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Analyse an advertisement — Internship Advert Review{% endblock %}
+{% block content %}
+<h1>Analyse an internship advertisement</h1>
+<p class="muted">Paste the advertisement text and any employer details you have. The more fields you complete, the more complete the credibility indicators will be.</p>
+
+<div id="errors" class="error-list hidden"></div>
+
+<form id="analyse-form">
+  <fieldset>
+    <legend>Advertisement</legend>
+    <div class="field">
+      <label for="title">Job title</label>
+      <input type="text" id="title" name="title" required placeholder="e.g. Marketing Intern">
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required placeholder="Paste the full advertisement description here"></textarea>
+    </div>
+    <div class="field">
+      <label for="requirements">Requirements</label>
+      <textarea id="requirements" name="requirements" placeholder="Optional"></textarea>
+    </div>
+    <div class="field">
+      <label for="benefits">Benefits</label>
+      <textarea id="benefits" name="benefits" placeholder="Optional"></textarea>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location">
+      </div>
+      <div class="field">
+        <label for="salary_range">Salary range</label>
+        <input type="text" id="salary_range" name="salary_range" placeholder="e.g. $18,000 - $22,000">
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Employer information</legend>
+    <div class="field">
+      <label for="employer_name">Employer name</label>
+      <input type="text" id="employer_name" name="employer_name">
+    </div>
+    <div class="field">
+      <label for="company_profile">Company profile</label>
+      <textarea id="company_profile" name="company_profile" placeholder="Optional description of the employer"></textarea>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="industry">Industry</label>
+        <input type="text" id="industry" name="industry">
+      </div>
+      <div class="field">
+        <label for="employment_type">Employment type</label>
+        <input type="text" id="employment_type" name="employment_type" placeholder="e.g. Internship">
+      </div>
+    </div>
+    <div class="checkbox-field">
+      <input type="checkbox" id="has_company_logo" name="has_company_logo">
+      <label for="has_company_logo">Advertisement displays a company logo</label>
+    </div>
+    <div class="checkbox-field">
+      <input type="checkbox" id="has_questions" name="has_questions">
+      <label for="has_questions">Application includes screening questions</label>
+    </div>
+  </fieldset>
+
+  <button type="submit" class="btn" id="submit-btn">Run analysis</button>
+</form>
+
+<div id="processing" class="panel hidden" style="margin-top:1.25rem;">
+  <h3 style="margin-bottom:0.5rem;">Analysing submission…</h3>
+  <p class="muted" style="margin:0;">Running NLP analysis and employer credibility checks. This is usually quick.</p>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analyse.js') }}"></script>
+{% endblock %}
