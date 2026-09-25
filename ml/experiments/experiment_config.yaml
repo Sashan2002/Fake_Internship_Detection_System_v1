@@ -1,0 +1,61 @@
+# Experiment registry - Section 10 (Model Training Experiments).
+# Each experiment must be run with a fixed random_seed and its full
+# configuration recorded (Section 17). Results are written to
+# ml/experiments/runs/<experiment_id>/.
+
+dataset:
+  path: "ml/data/raw/emscad_research_ready.csv"
+  version: "unset"        # set to a real version/hash once the dataset is placed
+  test_size: 0.15
+  val_size: 0.15
+  random_seed: 42
+
+experiments:
+  E1:
+    name: "majority_reference"
+    description: "Majority/class-frequency reference"
+  E2:
+    name: "tfidf_logreg"
+    description: "TF-IDF + Logistic Regression"
+    max_features: 20000
+    ngram_range: [1, 2]
+  E3:
+    name: "tfidf_classical_ml"
+    description: "TF-IDF + classical ML (random forest / linear SVM)"
+    classifier: "random_forest"
+  E4:
+    name: "credibility_only"
+    description: "Credibility-only model"
+  E5:
+    name: "transformer_only"
+    description: "Transformer-only (BERT/RoBERTa)"
+    architecture: "bert"     # switch to "roberta" for the comparison run
+    checkpoint: "bert-base-uncased"
+    max_length: 256
+    learning_rate: 2.0e-5
+    batch_size: 16
+    epochs: 3
+  E6:
+    name: "integrated_nlp_credibility"
+    description: "Integrated NLP + credibility"
+    use_nlp: true
+    use_credibility: true
+  E7:
+    name: "integrated_ablation_no_credibility"
+    description: "Integrated without credibility (ablation)"
+    use_nlp: true
+    use_credibility: false
+  E8:
+    name: "integrated_ablation_no_nlp"
+    description: "Integrated without NLP (ablation)"
+    use_nlp: false
+    use_credibility: true
+  E9:
+    name: "integrated_with_uncertainty"
+    description: "Integrated + uncertainty"
+    target_defer_rate: 0.15
+  E10:
+    name: "integrated_with_xai"
+    description: "Integrated + XAI"
+    shap_background_samples: 100
+    lime_num_features: 10

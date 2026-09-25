@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Env
+.env
+
+# Data (never commit raw/processed research data)
+ml/data/raw/*
+!ml/data/raw/.gitkeep
+ml/data/processed/*
+!ml/data/processed/.gitkeep
+ml/data/splits/*
+!ml/data/splits/.gitkeep
+
+# Models (large binaries - track via releases / DVC / LFS, not plain git)
+models/baseline/*
+!models/baseline/.gitkeep
+models/transformer/*
+!models/transformer/.gitkeep
+models/integrated/*
+!models/integrated/.gitkeep
+
+# Database
+database/*.db
+
+# Experiment outputs
+ml/experiments/runs/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,38 @@
+# Core
+python-dotenv==1.0.1
+PyYAML==6.0.1
+
+# Backend
+Flask==3.0.3
+Flask-CORS==4.0.1
+Werkzeug==3.0.3
+
+# Data / ML
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+scipy==1.13.1
+
+# NLP / Deep Learning
+transformers==4.44.2
+torch==2.3.1
+tokenizers==0.19.1
+
+# Explainability
+shap==0.46.0
+lime==0.2.0.1
+
+# Visualisation
+matplotlib==3.9.1
+plotly==5.23.0
+
+# Experiment tracking (structured logs are used by default; mlflow optional)
+mlflow==2.15.1
+
+# Testing
+pytest==8.3.2
+pytest-cov==5.0.0
+
+# Utilities
+joblib==1.4.2
+tqdm==4.66.5
