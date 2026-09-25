@@ -1,0 +1,370 @@
+/* ==========================================================================
+   Fake Internship Detection System - Design System
+   Concept: "Evidence dossier" - the app reads like a case file: a claim
+   comes in, indicators are logged, a verdict is proposed with visible
+   uncertainty, and every verdict is paired with the evidence behind it.
+   Cool paper background (not the common warm-cream/terracotta pairing),
+   ink navy for structure, muted verdict colors that never claim certainty.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #161a22;
+  --ink-soft: #3a4150;
+  --paper: #eef1ee;
+  --paper-raised: #ffffff;
+  --line: #d7dbd5;
+  --line-strong: #b7bdb4;
+
+  --legit: #2f6f5e;
+  --legit-bg: #e4efe9;
+  --fraud: #a23b2e;
+  --fraud-bg: #f5e6e2;
+  --review: #9a6b0c;
+  --review-bg: #f3ead4;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius: 6px;
+  --shadow: 0 1px 2px rgba(22, 26, 34, 0.06), 0 4px 14px rgba(22, 26, 34, 0.05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  margin: 0 0 0.4em 0;
+}
+
+h1 { font-size: 2.1rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.15rem; }
+
+p { margin: 0 0 1em 0; max-width: 70ch; }
+
+a { color: var(--ink-soft); }
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Top bar / nav ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-raised);
+}
+
+.topbar .brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.topbar .brand .mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--ink);
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.topbar nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.92rem;
+}
+
+.topbar nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.topbar nav a:hover, .topbar nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.narrow { max-width: 620px; }
+
+/* ---------- Cards / panels ---------- */
+.panel {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.panel + .panel { margin-top: 1.25rem; }
+
+.panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.75rem;
+}
+
+.panel-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Forms ---------- */
+.field { margin-bottom: 1.1rem; }
+
+.field label {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.field textarea { min-height: 110px; resize: vertical; }
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.checkbox-field label { margin: 0; }
+
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem 0.4rem;
+  margin: 0 0 1.25rem 0;
+}
+
+legend {
+  font-family: var(--font-display);
+  padding: 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+
+.btn.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+.btn.secondary:hover { background: var(--line); }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Verdict banner ---------- */
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.verdict.legitimate { background: var(--legit-bg); border-color: var(--legit); }
+.verdict.fraudulent { background: var(--fraud-bg); border-color: var(--fraud); }
+.verdict.review { background: var(--review-bg); border-color: var(--review); }
+
+.verdict .label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+
+.verdict.legitimate .label { color: var(--legit); }
+.verdict.fraudulent .label { color: var(--fraud); }
+.verdict.review .label { color: var(--review); }
+
+.verdict .sub { font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
+
+/* ---------- Gauge / bars ---------- */
+.metric-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 60px;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.9rem;
+}
+
+.bar-track {
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill { height: 100%; background: var(--ink); }
+.bar-fill.legit { background: var(--legit); }
+.bar-fill.fraud { background: var(--fraud); }
+
+/* ---------- Indicator grid ---------- */
+.indicator-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.5rem;
+}
+
+.indicator {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.92rem;
+}
+
+.indicator .value.present { color: var(--legit); }
+.indicator .value.absent { color: var(--fraud); }
+
+/* ---------- Evidence / XAI list ---------- */
+.evidence-list { list-style: none; margin: 0; padding: 0; }
+
+.evidence-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.evidence-item .token { color: var(--ink); }
+.evidence-item .direction.increases_fraud_signal { color: var(--fraud); }
+.evidence-item .direction.decreases_fraud_signal { color: var(--legit); }
+
+/* ---------- Notices ---------- */
+.notice {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.error-list {
+  background: var(--fraud-bg);
+  border: 1px solid var(--fraud);
+  color: var(--fraud);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- History table ---------- */
+table.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+table.history-table th, table.history-table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+table.history-table th {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+/* ---------- Utility ---------- */
+.stack { display: flex; flex-direction: column; gap: 1.25rem; }
+.hidden { display: none !important; }
+.center { text-align: center; }
+.muted { color: var(--ink-soft); }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1.25rem 2rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .field-row { grid-template-columns: 1fr; }
+  .indicator-grid { grid-template-columns: 1fr; }
+  main { padding: 1.5rem 1.1rem 3rem; }
+}

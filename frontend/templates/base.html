@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Fake Internship Detection System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/dashboard"><span class="mark"></span> Internship Advert Review</a>
+      <nav>
+        <a href="/dashboard" {% if active == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
+        <a href="/analyse" {% if active == 'analyse' %}class="active"{% endif %}>Analyse</a>
+        <a href="/history" {% if active == 'history' %}class="active"{% endif %}>History</a>
+        <a href="/about" {% if active == 'about' %}class="active"{% endif %}>About</a>
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      Decision-support tool. Predictions describe model output, not confirmed fact — see About / Methodology.
+    </footer>
+  </div>
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
