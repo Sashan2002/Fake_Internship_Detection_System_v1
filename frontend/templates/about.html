@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}About / Methodology — Internship Advert Review{% endblock %}
+{% block content %}
+<h1>About this system</h1>
+<p>
+  This tool is an AI-based decision-support system for reviewing internship advertisements. It
+  combines Natural Language Processing (NLP) analysis of advertisement text with structured
+  employer credibility indicators to produce a prediction, together with a confidence score,
+  an uncertainty estimate, and an explanation of the factors that most influenced the result.
+</p>
+
+<div class="panel">
+  <h2 style="font-size:1.1rem;">What the result means</h2>
+  <p>
+    A result of <strong>Potentially Legitimate</strong> or <strong>Potentially Fraudulent</strong>
+    describes the model's prediction for this specific submission - it is not proof of an
+    organisation's legitimacy or fraud. A result of <strong>Requires Review</strong> means the
+    model's confidence was too low to make either prediction reliably, and a human reviewer should
+    look more closely.
+  </p>
+</div>
+
+<div class="panel">
+  <h2 style="font-size:1.1rem;">Method, in brief</h2>
+  <p>
+    Advertisement text is analysed with a transformer-based language model (BERT/RoBERTa) or, for
+    the current baseline configuration, a TF-IDF and logistic regression model. Employer and
+    advertisement fields (contact details, salary disclosure, completeness of the listing, and
+    similar) are converted into structured credibility indicators. Where the integrated model is
+    active, both representations are combined before a final probability is produced.
+  </p>
+</div>
+
+<div class="panel">
+  <h2 style="font-size:1.1rem;">Limitations</h2>
+  <p>
+    The underlying research dataset (EMSCAD) is not specific to internships, includes a limited
+    number of internship examples, and is class-imbalanced toward legitimate postings, which
+    limits how confidently fraud can be detected, particularly for advertisement styles not well
+    represented in the training data. Credibility indicators describe what is present or absent in
+    a submission - they are not independent verification of an employer, and external
+    verification (e.g. company registries) is not currently part of this system.
+  </p>
+</div>
+{% endblock %}
