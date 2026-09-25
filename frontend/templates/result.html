@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Result — Internship Advert Review{% endblock %}
+{% block content %}
+<h1>Analysis result</h1>
+
+<div id="loading" class="muted">Loading result…</div>
+<div id="result-content" class="stack hidden">
+
+  <div id="verdict" class="verdict">
+    <div>
+      <p class="label" id="verdict-label">—</p>
+      <p class="sub" id="verdict-sub">—</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 style="font-size:1.1rem;margin:0;">Prediction detail</h2>
+      <span class="meta" id="prediction-meta">—</span>
+    </div>
+    <div class="metric-row">
+      <span>Fraud probability</span>
+      <div class="bar-track"><div class="bar-fill fraud" id="bar-probability" style="width:0%"></div></div>
+      <span id="value-probability">—</span>
+    </div>
+    <div class="metric-row">
+      <span>Confidence</span>
+      <div class="bar-track"><div class="bar-fill" id="bar-confidence" style="width:0%"></div></div>
+      <span id="value-confidence">—</span>
+    </div>
+    <div class="metric-row">
+      <span>Uncertainty</span>
+      <div class="bar-track"><div class="bar-fill legit" id="bar-uncertainty" style="width:0%"></div></div>
+      <span id="value-uncertainty">—</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 style="font-size:1.1rem;margin:0;">Employer / advertisement credibility indicators</h2>
+    </div>
+    <div class="indicator-grid" id="credibility-grid"></div>
+    <p class="notice" id="credibility-note"></p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 style="font-size:1.1rem;margin:0;">Influential factors (explanation)</h2>
+    </div>
+    <ul class="evidence-list" id="evidence-list"></ul>
+    <p class="notice" id="explanation-note"></p>
+  </div>
+
+  <p class="notice">
+    "Potentially Legitimate" and "Potentially Fraudulent" describe this model's prediction, not
+    proof of an organisation's legitimacy or fraud. Treat this result as decision support and use
+    independent judgement, particularly for "Requires Review" outcomes.
+  </p>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.PREDICTION_ID = {{ prediction_id }};</script>
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}
